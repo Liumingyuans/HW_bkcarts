@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+<!-- ajax 購買總金額 -->
+	$.ajax({
+			url : "http://localhost:8080/bookcarts/TotalMoney",
+			context : document.body,
+			success : function(data) {
+				$("#TotalMoney").html(data);
+			}
+		});
+<!-- ajax 使用者購買紀錄 -->
+	$.ajax({
+			url : "http://localhost:8080/bookcarts/totalBuy",
+			context : document.body,
+			success : function(data) {
+				$("#moneytable").html(data);
+			}
+		});
+<!-- ajax 使用者資訊 -->
+	$.ajax({
+			url : "http://localhost:8080/bookcarts/user",
+			context : document.body,
+			success : function(data) {
+				$("#user").html(data);
+			}
+		});
+<!-- javascript 計算 -->	
+	function calculate() {
+					
+		var sumprice = 0;
+		var tbody = document.getElementById("moneytable");
+		var rows = tbody.rows;
+		var sum = 0;
+		for (var i = 1;i<rows.length;i++) {
+				sum = sum+ parseFloat(document.getElementById("moneytable").rows[i].cells[4].innerHTML);		
+		}
+		document.getElementById("totalMoney").value = sum;
+	}
+</script>
+<title>finally buy</title>
+</head>
+<body onclick="calculate();" >
+	<h1 style="font-family: 微軟正黑體;">購買資訊</h1>
+	<div id="user"></div>
+	<table border="3"  id="moneytable" style="text-align:center;background-color:#FFFFBB;width:500px;height:50px;">
+	</table>		
+	<div ><h1 style="font-family: impact;">Buy ALL Money:</h1><h1 id="TotalMoney" style="font-family: impact;color:#FF0000;"></h1></div>
+	<!--  
+	<table>
+		<tr>
+			<td>
+			購買  Total 金額:<input id="totalMoney" name="totalMoney" type="text" readonly="readonly" value='0'>
+			</td>
+		</tr>
+	</table>
+	-->
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript">
+	$.ajax({
+			url : "http://localhost:8080/bookcarts/number",
+			context : document.body,
+			success : function(data) {
+				$("#resultBook").html(data);
+			}
+		});
+	$.ajax({
+			url : "http://localhost:8080/bookcarts/TotalMoney",
+			context : document.body,
+			success : function(data) {
+				$("#TotalMoney").html(data);
+			}
+		});
+</script>
+<title>購買人員資訊</title>
+</head>
+<body onclick="calculate();">
+	
+	<form method="post" action="total">
+		<h1 style="font-family: 微軟正黑體;">購買人資訊</h1>
+			<ul>
+			  <li>Name:<input  type="text" id="myName" name="uesrName" value="yourName"></li>
+			  <li>Mail:<input  type="text" id="myMail" name="uesrMail" value="yourMail"></li>
+			  <li>Tel :<input  type="text" id="myTel" name="userTel" value="yourTel"></li>
+			  <li>Address：<textarea  name="address"></textarea></li>
+			</ul>
+		<br>
+		<input type="submit" value="確定">
+		<!-- 回到上一頁 -->
+		<input name="Submit" type="button" id="Submit" onClick="javascript:history.back(1)" value="回一上頁" />
+		
+	</form>
+	<h1 style="font-family: 微軟正黑體;">購買資料</h1>
+	<table border="1" id="resultBook"
+		style="text-align: center; width: 900px; height: 50px;">
+	</table>
+	<div ><h3 style="font-family: impact;">Buy ALL Money:</h3><h3 id="TotalMoney" style="font-family: impact;color:#FF0000;"></h3></div>
+	<!--
+	<script>
+	
+		function calculate() {
+						
+			var sumprice = 0;
+			var tbody = document.getElementById("resultBook");
+			var rows = tbody.rows;
+			var sum = 0;
+			for (var i = 1;i<rows.length;i++) {
+					sum = sum+ parseFloat(document.getElementById("resultBook").rows[i].cells[2].innerHTML);		
+			}
+			document.getElementById("totalMoney").value = sum;
+		}
+	</script>
+	-->
+</body>
+</html>
